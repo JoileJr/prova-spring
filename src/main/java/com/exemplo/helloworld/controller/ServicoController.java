@@ -1,8 +1,10 @@
 package com.exemplo.helloworld.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,6 @@ public class ServicoController {
     @Autowired
     ServicoService service;
 
-   
     @GetMapping("/status")
     public List<Servico> listarPorStatus(@RequestParam(value = "status", defaultValue = "pendente") String status){
         return service.buscarPorStatus(status);
@@ -54,5 +55,11 @@ public class ServicoController {
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable("id") Long id){
         service.excluir(id);
+    }
+
+    @DeleteMapping("/{dataInicio}/{dataTermino}")
+    public void excluirPorData(@PathVariable("dataInicio")@DateTimeFormat(pattern = "yyyy-mm-dd") Date dataInicio, 
+    @PathVariable("dataInicio") @DateTimeFormat(pattern = "yyyy-mm-dd") Date dataTermino){
+        service.excluir(dataInicio, dataTermino);
     }
 }

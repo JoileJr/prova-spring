@@ -1,5 +1,6 @@
 package com.exemplo.helloworld.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,8 @@ public class ServicoService {
 
     public void excluir(Long id){
         Servico obj = repository.findById(id).get();
-        repository.delete(obj);
+        obj.setStatus("Excluido");
+        repository.saveAndFlush(obj);
     }
 
     private void atualizarStatus(Servico servico){
@@ -49,6 +51,14 @@ public class ServicoService {
         }
         if(servico.getValor_pago() == null){
             servico.setStatus("pendente");
+        }
+    }
+
+    public void excluir(Date dataInicial, Date dataFinal){
+        List<Servico> servicos = repository.servicoDataInicio(dataInicial, dataFinal);
+        for(Servico s:servicos){
+            s.setStatus("excluido");
+            repository.saveAndFlush(s);
         }
     }
 
