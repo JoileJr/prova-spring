@@ -16,6 +16,6 @@ public interface ServicoRepository extends JpaRepository<Servico ,Long> {
     @Query("from Servico where status <> 'excluido' or status is null and valor_pago is null and data_de_pagamento is null")
     List<Servico> findByStatusOpen();
 
-    @Query("from Servico where data_de_inicio between ?1 and ?2 and status <> 'excluido' ")
+    @Query("from Servico where data_de_inicio between ?1 and ?2 and status <> 'excluido'")
     List<Servico> servicoDataInicio(Date dataInicio, Date dataFinal);
 }

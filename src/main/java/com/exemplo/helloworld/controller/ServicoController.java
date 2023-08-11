@@ -58,8 +58,8 @@ public class ServicoController {
     }
 
     @DeleteMapping("/{dataInicio}/{dataTermino}")
-    public void excluirPorData(@PathVariable("dataInicio")@DateTimeFormat(pattern = "yyyy-mm-dd") Date dataInicio, 
-    @PathVariable("dataInicio") @DateTimeFormat(pattern = "yyyy-mm-dd") Date dataTermino){
+    public void excluirPorData(@PathVariable("dataInicio")@DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, 
+    @PathVariable("dataTermino") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataTermino){
         service.excluir(dataInicio, dataTermino);
     }
 }
