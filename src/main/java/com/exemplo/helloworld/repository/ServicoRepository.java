@@ -10,6 +10,9 @@ import com.exemplo.helloworld.entity.Servico;
 
 public interface ServicoRepository extends JpaRepository<Servico ,Long> {
 
+    @Query("from Servico where valor_pago <> null and data_de_pagamento <> null")
+    List<Servico> servicosPagos();
+
     @Query("from Servico where status like %?1%")
     List<Servico> findByStatus(String status);
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exemplo.helloworld.entity.Servico;
+import com.exemplo.helloworld.entity.Variancia;
 import com.exemplo.helloworld.service.ServicoService;
 
 @RestController
@@ -61,5 +63,10 @@ public class ServicoController {
     public void excluirPorData(@PathVariable("dataInicio")@DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, 
     @PathVariable("dataTermino") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataTermino){
         service.excluir(dataInicio, dataTermino);
+    }
+
+    @GetMapping("/variancia")
+    public ResponseEntity<Variancia> VarianciaMedia(){
+        return service.calculoVarianciaMedia();
     }
 }
